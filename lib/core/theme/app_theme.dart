@@ -13,6 +13,7 @@ class AppTheme {
       useMaterial3: true,
       brightness: Brightness.light,
       fontFamily: AppTextTheme.primaryFont,
+       splashFactory: InkRipple.splashFactory,
       colorScheme: ColorScheme.light(
         primary: AppColors.primary,
         secondary: AppColors.secondary,

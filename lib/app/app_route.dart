@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:subscription_manager/features/main/presentation/cubit/app_bottom_nav_cubit.dart';
-import 'package:subscription_manager/features/main/presentation/pages/app_bottom_nav.dart';
+import 'package:subscription_manager/features/app_bottom_nav/presentation/cubit/app_bottom_nav_cubit.dart';
+import 'package:subscription_manager/features/app_bottom_nav/presentation/pages/app_bottom_nav.dart';
 import 'package:subscription_manager/injection_container.dart' as di;
 import 'package:subscription_manager/main.dart';
 
@@ -24,10 +24,15 @@ import 'package:subscription_manager/main.dart';
 final GoRouter appRouter = GoRouter(
   navigatorKey: navigatorKey,
   initialLocation: '/',
-  // redirect: _onboardingRedirect,
   routes: [
     GoRoute(
       path: '/',
+      builder: (context, state) {
+        return BlocProvider(
+            create: (context) => di.sl<AppBottomNavCubit>(),
+            child: const AppBottomNav(),
+          );
+      },
       pageBuilder: (context, state) {
         return CustomTransitionPage(
           child: BlocProvider(

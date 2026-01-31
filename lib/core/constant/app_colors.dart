@@ -7,8 +7,8 @@ class AppColors {
   AppColors._(); // Private constructor to prevent instantiation
 
   // Primary colors - Modern indigo
-  static const Color primary = Color(0xFF6366F1);
-  static const Color primaryVariant = Color(0xFF4F46E5);
+  static const Color primary = Color(0xFF4F46E5);
+  static const Color primaryVariant = Color(0xFF6366F1);
   static const Color onPrimary = Color(0xFFFFFFFF);
 
   // Secondary colors - Emerald green

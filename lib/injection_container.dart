@@ -1,5 +1,5 @@
 import 'package:get_it/get_it.dart';
-import 'package:subscription_manager/features/main/presentation/cubit/app_bottom_nav_cubit.dart';
+import 'package:subscription_manager/features/app_bottom_nav/presentation/cubit/app_bottom_nav_cubit.dart';
 
 final sl = GetIt.instance;
 
