@@ -1,0 +1,13 @@
+{
+  "@@locale": "bn",
+  "appName": "Subscription Manager",
+  "appLanguage": "অ্যাপ ভাষা",
+  "appLanguageDescription": "অ্যাপ ভাষা পরিবর্তন করুন",
+  "@appLanguageDescription": {
+    "description": "ভাষা বিকল্পের জন্য সেটিংসে প্রদর্শিত বিবরণ"
+  },
+  "currentLanguage": "বাংলা",
+  "@currentLanguage": {
+    "description": "সেটিংসে প্রদর্শিত বর্তমান নির্বাচিত ভাষার নাম"
+  }
+}

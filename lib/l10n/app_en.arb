@@ -1,0 +1,13 @@
+{
+  "@@locale": "en",
+  "appName": "Subscription Manager",
+  "appLanguage": "App language",
+  "appLanguageDescription": "Change the app language",
+  "@appLanguageDescription": {
+    "description": "Description text shown in settings for the language option"
+  },
+  "currentLanguage": "English",
+  "@currentLanguage": {
+    "description": "Current selected language name displayed in settings"
+  }
+}
