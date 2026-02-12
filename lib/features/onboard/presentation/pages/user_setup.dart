@@ -29,7 +29,76 @@ class _UserSetupState extends State<UserSetup> {
       context: context,
       initialTime: _notificationTime,
       initialEntryMode: TimePickerEntryMode.input,
-      builder: (context, child) => child!,
+      builder: (context, child) => Theme(
+        data: Theme.of(context).copyWith(
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: AppColors.primary,
+          ),
+          textTheme: Theme.of(context).textTheme.copyWith(
+            bodyMedium: Theme.of(context).textTheme.bodyMedium!.copyWith(
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+              color: AppColors.onSecondary,
+            ),
+          ),
+          timePickerTheme: TimePickerThemeData(
+            dayPeriodColor: WidgetStateColor.resolveWith((states) {
+              if (states.contains(WidgetState.selected)) {
+                return AppColors.primary;
+              }
+              return AppColors.onPrimary;
+            }),
+            dayPeriodTextStyle: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+              color: AppColors.onPrimary,
+            ),
+            dayPeriodBorderSide: BorderSide(color: AppColors.primary),
+            dayPeriodTextColor: WidgetStateColor.resolveWith((states) {
+              if (states.contains(WidgetState.selected)) {
+                return AppColors.onPrimary;
+              }
+              return AppColors.onBackgroundLight;
+            }),
+            inputDecorationTheme: InputDecorationTheme(
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 10,
+                vertical: 10,
+              ),
+              fillColor: AppColors.onPrimary,
+              filled: true,
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide(color: AppColors.primary),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide(color: AppColors.primary),
+              ),
+              outlineBorder: BorderSide(color: AppColors.primary),
+              disabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide(color: AppColors.primary),
+              ),
+
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide(color: AppColors.primary),
+              ),
+            ),
+
+            backgroundColor: AppColors.onPrimary,
+            hourMinuteColor: AppColors.primary.withOpacity(0.07),
+            dialHandColor: AppColors.primary,
+            dialBackgroundColor: AppColors.onPrimary,
+            entryModeIconColor: AppColors.primary,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+          ),
+        ),
+        child: child!,
+      ),
     );
     if (picked != null) setState(() => _notificationTime = picked);
   }

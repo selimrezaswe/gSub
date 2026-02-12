@@ -11,6 +11,8 @@ import 'package:subscription_manager/features/notifications/presentation/pages/n
 import 'package:subscription_manager/features/onboard/presentation/pages/onboarding_screen.dart';
 import 'package:subscription_manager/features/onboard/presentation/pages/sync_page.dart';
 import 'package:subscription_manager/features/onboard/presentation/pages/user_setup.dart';
+import 'package:subscription_manager/features/plans/domain/entites/plan.dart';
+import 'package:subscription_manager/features/plans/presentation/pages/crud_plan.dart';
 import 'package:subscription_manager/features/settings/presentation/pages/settings_screen.dart';
 import 'package:subscription_manager/features/plans/presentation/pages/plan_screen.dart';
 import 'package:subscription_manager/features/reports/presentation/pages/report_screen.dart';
@@ -50,6 +52,8 @@ class AppRoutes {
   static const String onboarding = '/newuser';
   static const String userSetup = '/user-setup';
   static const String syncPage = '/sync-page';
+  static const String editPlan = '/edit-plan';
+  static const String addPlan = '/add-plan';
 }
 
 final GoRouter appRouter = GoRouter(
@@ -197,6 +201,38 @@ final GoRouter appRouter = GoRouter(
       path: AppRoutes.syncPage,
       pageBuilder: (context, state) => const NoTransitionPage(
         child: SyncPage(),
+      ),
+    ),
+    GoRoute(
+      path: AppRoutes.editPlan,
+      pageBuilder: (context, state) => CustomTransitionPage(
+        child: CrudPlanScreen(
+          plan: state.extra as Plan,
+        ),
+        transitionDuration: const Duration(milliseconds: 350),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+          FadeTransition(
+            opacity: CurvedAnimation(
+              parent: animation,
+              curve: Curves.easeInOut,
+            ),
+            child: child,
+          ),
+      ),
+    ),
+    GoRoute(
+      path: AppRoutes.addPlan,
+      pageBuilder: (context, state) => CustomTransitionPage(
+        child: const CrudPlanScreen(),
+        transitionDuration: const Duration(milliseconds: 350),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+          FadeTransition(
+            opacity: CurvedAnimation(
+              parent: animation,
+              curve: Curves.easeInOut,
+            ),
+            child: child,
+          ),
       ),
     ),
   ],

@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:subscription_manager/app/app_route.dart';
 import 'package:subscription_manager/core/constant/app_colors.dart';
 import 'package:subscription_manager/features/app_details/domain/entities/app_details_param.dart';
 import 'package:subscription_manager/features/app_details/presentation/widget/billing_history_tile.dart';
 import 'package:subscription_manager/features/app_details/presentation/widget/detail_row.dart';
 import 'package:subscription_manager/features/app_details/presentation/widget/tab_button.dart';
+import 'package:subscription_manager/features/plans/domain/entites/plan.dart';
 
 class AppDetailScreen extends StatefulWidget {
   final AppDetailsParam param;
@@ -134,7 +136,20 @@ class _AppDetailScreenState extends State<AppDetailScreen> {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
-                        // TODO: Handle edit
+                        context.push(
+                          AppRoutes.editPlan,
+                          extra: Plan(
+                            id: '1',
+                            appid: '1',
+                            categoryid: '1',
+                            paymentCycle: PaymentCycle.monthly,
+                            subscriptionDate: 1770921950000,
+                            subscriptionCost: 1,
+                            subscriptionReminder:
+                                SubscriptionReminder.oneDayBefore,
+                            details: 'Testing plan',
+                          ),
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primary,

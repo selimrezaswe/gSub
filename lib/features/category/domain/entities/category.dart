@@ -1,15 +1,19 @@
+import 'package:uuid/uuid.dart';
+
 class Category {
   final String name;
   final String amount;
   final String subscriptions;
   final String icon;
   final String details;
+  final String id;
 
-  const Category({
+  Category({
     required this.name,
     required this.amount,
     required this.subscriptions,
     required this.icon,
     required this.details,
-  });
+    String? id,
+  }) : id = id ?? const Uuid().v4();
 }

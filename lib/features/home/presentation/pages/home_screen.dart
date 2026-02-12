@@ -226,6 +226,7 @@ class _HomeScreenState extends State<HomeScreen>
                                 icon: Iconsax.add,
                                 onTap: () {
                                   _toggleExpanded();
+                                  context.push(AppRoutes.addPlan);
 
                                   // TODO: Navigate to add plan
                                 },

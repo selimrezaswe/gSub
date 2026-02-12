@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:subscription_manager/core/constant/app_colors.dart';
 
 class TextFieldWithLabel extends StatelessWidget {
@@ -7,14 +8,32 @@ class TextFieldWithLabel extends StatelessWidget {
   final String? hintText;
   final int? maxLines;
   final int? minLines;
-
+  final TextInputType? keyboardType;
+  final TextInputAction? textInputAction;
+  final String? Function(String?)? validator;
+  final bool? isReadOnly;
+  final Widget? suffixIcon;
+  final Widget? prefixIcon;
+  final Widget? searchPad;
+  final List<TextInputFormatter>? inputFormatters;
+  final Function(PointerDownEvent)? ontapOutSide;
+  final VoidCallback? ontap;
   const TextFieldWithLabel({
     super.key,
     required this.label,
     this.controller,
     this.hintText,
-    this.maxLines,
-    this.minLines,
+    this.maxLines = 1,
+    this.minLines = 1,
+    this.keyboardType,
+    this.textInputAction,
+    this.validator,
+    this.isReadOnly,
+    this.suffixIcon,
+    this.prefixIcon,
+    this.searchPad,
+    this.ontapOutSide,
+    this.ontap, this.inputFormatters,
   });
 
   @override
@@ -35,13 +54,25 @@ class TextFieldWithLabel extends StatelessWidget {
           ),
         ),
         TextFormField(
+          inputFormatters: inputFormatters,
+          onTap: ontap,
+          keyboardType: keyboardType,
+          textInputAction: textInputAction,
+          validator: validator,
+
+          readOnly: isReadOnly ?? false,
+          onTapOutside: ontapOutSide,
           controller: controller,
           maxLines: maxLines,
           minLines: minLines,
           decoration: InputDecoration(
+            suffixIcon: suffixIcon,
+            prefixIcon: prefixIcon,
+            
             hintText: hintText,
           ),
         ),
+        if (searchPad != null) searchPad!,
       ],
     );
   }
