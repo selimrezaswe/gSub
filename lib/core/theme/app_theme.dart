@@ -13,7 +13,9 @@ class AppTheme {
       useMaterial3: true,
       brightness: Brightness.light,
       fontFamily: AppTextTheme.primaryFont,
-       splashFactory: InkRipple.splashFactory,
+      splashFactory: InkRipple.splashFactory,
+      iconTheme: IconThemeData(color: Color(0xff868DA6)),
+
       colorScheme: ColorScheme.light(
         primary: AppColors.primary,
         secondary: AppColors.secondary,
@@ -25,11 +27,20 @@ class AppTheme {
         onSurface: AppColors.onSurfaceLight,
       ),
       scaffoldBackgroundColor: AppColors.backgroundLight,
+      bottomSheetTheme: BottomSheetThemeData(
+        dragHandleColor: AppColors.outline,
+      ),
+      timePickerTheme: TimePickerThemeData(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+      ),
       appBarTheme: const AppBarTheme(
         elevation: 0,
         centerTitle: false,
+        toolbarHeight: 100,
         systemOverlayStyle: SystemUiOverlayStyle.dark,
-        backgroundColor: AppColors.surfaceLight,
+        backgroundColor: AppColors.transparent,
         foregroundColor: AppColors.onSurfaceLight,
         titleTextStyle: TextStyle(
           fontFamily: AppTextTheme.primaryFont,
@@ -45,6 +56,7 @@ class AppTheme {
         ),
         color: AppColors.surfaceLight,
       ),
+
       textTheme: TextTheme(
         displayLarge: AppTextTheme.displayLarge.copyWith(
           color: AppColors.onBackgroundLight,
@@ -66,12 +78,15 @@ class AppTheme {
         ),
         titleLarge: AppTextTheme.titleLarge.copyWith(
           color: AppColors.onSurfaceLight,
+          fontSize: 28,
+          fontWeight: FontWeight.w600,
         ),
         titleMedium: AppTextTheme.titleMedium.copyWith(
           color: AppColors.onSurfaceLight,
         ),
         titleSmall: AppTextTheme.titleSmall.copyWith(
           color: AppColors.onSurfaceLight,
+          fontSize: 14,
         ),
         bodyLarge: AppTextTheme.bodyLarge.copyWith(
           color: AppColors.onBackgroundLight,
@@ -112,24 +127,62 @@ class AppTheme {
         foregroundColor: AppColors.onPrimary,
         elevation: 4,
       ),
+      textSelectionTheme: TextSelectionThemeData(
+        cursorColor: AppColors.primary,
+        selectionColor: AppColors.primary.withOpacity(0.1),
+        selectionHandleColor: AppColors.primary,
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          padding: const EdgeInsets.symmetric(vertical: 14),
+          backgroundColor: AppColors.primary,
+          foregroundColor: AppColors.onPrimary,
+          elevation: 1,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          textStyle: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: AppColors.surfaceLight,
+        fillColor: Colors.white,
+        hintStyle: TextStyle(
+          fontFamily: AppTextTheme.primaryFont,
+          fontSize: 14,
+          fontWeight: FontWeight.w400,
+          color: AppColors.onSecondary,
+        ),
+
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: AppColors.outline),
+          borderRadius: BorderRadius.circular(16),
+          borderSide: const BorderSide(
+            color: AppColors.outline,
+            style: BorderStyle.none,
+          ),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: AppColors.outline),
+          borderRadius: BorderRadius.circular(16),
+          borderSide: const BorderSide(
+            color: AppColors.outline,
+            style: BorderStyle.none,
+          ),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: AppColors.primary, width: 2),
+          borderRadius: BorderRadius.circular(16),
+          borderSide: const BorderSide(
+            color: AppColors.primary,
+          ),
         ),
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: AppColors.error),
+          borderRadius: BorderRadius.circular(16),
+          borderSide: const BorderSide(
+            color: AppColors.error,
+            style: BorderStyle.none,
+          ),
         ),
       ),
       listTileTheme: const ListTileThemeData(

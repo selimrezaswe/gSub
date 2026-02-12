@@ -1,85 +1,75 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:hugeicons/hugeicons.dart';
+import 'package:go_router/go_router.dart';
 import 'package:subscription_manager/core/constant/app_colors.dart';
-import 'package:subscription_manager/features/app_bottom_nav/presentation/cubit/app_bottom_nav_cubit.dart';
-import 'package:subscription_manager/features/app_bottom_nav/presentation/cubit/app_bottom_nav_state.dart';
-import 'package:subscription_manager/features/home/presentation/pages/home_screen.dart';
-import 'package:subscription_manager/features/menu/presentation/pages/menu_screen.dart';
-import 'package:subscription_manager/features/orders/presentation/pages/orders_screen.dart';
-import 'package:subscription_manager/features/reports/presentation/pages/report_screen.dart';
 
-class AppBottomNav extends StatefulWidget {
-  const AppBottomNav({super.key});
+class AppBottomNav extends StatelessWidget {
+  const AppBottomNav({super.key, required this.navigationShell});
 
-  @override
-  State<AppBottomNav> createState() => _AppBottomNavState();
-}
+  final StatefulNavigationShell navigationShell;
 
-class _AppBottomNavState extends State<AppBottomNav> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AppBottomNavCubit, AppBottomNavState>(
-      builder: (context, state) {
-        return Scaffold(
-          body: IndexedStack(
-            index: state.selectedIndex,
-            children: const [
-              MenuScreen(),
-              OrdersScreen(),
-              HomeScreen(),
-              ReportScreen(),
-            ],
-          ),
-          bottomNavigationBar: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
+    final isSettingsSelected = navigationShell.currentIndex == 3;
 
-            onTap: (value) {
-              context.read<AppBottomNavCubit>().changeIndex(value);
-            },
-            iconSize: 0,
-            currentIndex: state.selectedIndex,
-            showSelectedLabels: false,
-            showUnselectedLabels: false,
-
-            items: [
-              bottomNavBarItem(
-                context,
-                icondata: Icons.menu,
-                title: "Menu",
-              ),
-              bottomNavBarItem(
-                context,
-                icondata: Icons.note_add,
-                title: "Orders",
-              ),
-              bottomNavBarItem(
-                context,
-                icondata: Icons.home,
-                title: "Home",
-              ),
-              bottomNavBarItem(
-                context,
-                icondata: Icons.bar_chart,
-                title: "Report",
-              ),
-            ],
-          ),
-        );
-      },
+    return Scaffold(
+      body: navigationShell,
+      bottomNavigationBar: isSettingsSelected ? null : ClipRRect(
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
+        child: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          onTap: (value) {
+            navigationShell.goBranch(
+              value,
+              initialLocation: value == navigationShell.currentIndex,
+            );
+          },
+          iconSize: 0,
+          currentIndex: navigationShell.currentIndex,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          items: [
+            bottomNavBarItem(
+              context,
+              icondata: HugeIcons.strokeRoundedHome03,
+              title: "Home",
+            ),
+            bottomNavBarItem(
+              context,
+              icondata: Iconsax.heart,
+              title: "Plans",
+            ),
+            bottomNavBarItem(
+              context,
+              icondata: Iconsax.chart_15,
+              title: "Report",
+            ),
+            bottomNavBarItem(
+              context,
+              icondata: Iconsax.menu_1,
+              title: "Settings",
+            ),
+          ],
+        ),
+      ),
     );
   }
 
   BottomNavigationBarItem bottomNavBarItem(
     BuildContext context, {
-    required IconData icondata,
+    required dynamic icondata,
     required String title,
   }) {
     return BottomNavigationBarItem(
       backgroundColor: AppColors.primary,
       activeIcon: Container(
-        width: 72,
+        // margin: EdgeInsets.symmetric(horizontal: 5),
+        width: 85,
         height: 55,
-
         // padding: EdgeInsets.symmetric(horizontal: 10,vertical: 8),
         decoration: BoxDecoration(
           color: AppColors.primary,
@@ -90,11 +80,18 @@ class _AppBottomNavState extends State<AppBottomNav> {
           mainAxisAlignment: MainAxisAlignment.center,
           spacing: 3,
           children: [
-            Icon(
-              icondata,
-              size: 25,
-              color: Colors.white,
-            ),
+            if (icondata is IconData)
+              Icon(
+                icondata,
+                size: 25,
+                color: Colors.white,
+              )
+            else if (icondata is List<List<dynamic>>)
+              HugeIcon(
+                icon: icondata,
+                size: 25,
+                color: Colors.white,
+              ),
             Text(
               title,
               style: Theme.of(context).textTheme.labelMedium!.copyWith(
@@ -109,10 +106,18 @@ class _AppBottomNavState extends State<AppBottomNav> {
         mainAxisSize: MainAxisSize.min,
         spacing: 3,
         children: [
-          Icon(
-            icondata,
-            size: 25,
-          ),
+          if (icondata is IconData)
+            Icon(
+              icondata,
+              size: 25,
+              // color: Colors.white,
+            )
+          else if (icondata is List<List<dynamic>>)
+            HugeIcon(
+              icon: icondata,
+              size: 25,
+              // color: Colors.white,
+            ),
           Text(
             title,
             style: Theme.of(context).textTheme.labelMedium!.copyWith(

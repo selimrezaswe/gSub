@@ -30,6 +30,24 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
       debugShowCheckedModeBanner: false,
       routerConfig: appRouter,
+      builder: (context, child) {
+        return Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color(0xffD0D0F9),
+                Color(0xffEFF3F6),
+              ],
+              begin: Alignment.topCenter,
+              transform: GradientRotation(0.0),
+              tileMode: TileMode.clamp,
+              end: Alignment(0.0, -0.7),
+              stops: [0.0, 1.0],
+            ),
+          ),
+          child: child,
+        );
+      },
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
